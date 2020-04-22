@@ -1,0 +1,23 @@
+
+type Recipient {
+  firstName: String!
+  lastName: String!
+  sex: String!
+}
+
+type Salutation {
+    greeting: String!
+    sex: String!
+  }
+
+type Message {
+      message: String!
+      sex: String!
+  }
+
+  
+type Query {
+  allRecipients: [Recipient!]
+  allSalutations: [Salutation!]
+  allMessages: [Message!]
+}
