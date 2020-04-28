@@ -6,7 +6,7 @@
       <table class="table">
         <thead>
           <th scope="col">Message</th>
-          <th scope="col">Sex</th>
+          <th scope="col">Tone</th>
           <th scope="col"></th>
         </thead>
         <tbody>
@@ -15,7 +15,7 @@
               <b-form-textarea v-model="message.message" rows="2" required placeholder="Message"></b-form-textarea>
             </td>
             <td>
-              <b-form-select v-model="message.sex" :options="sexes" required></b-form-select>
+              <b-form-select v-model="message.tone" :options="tones" required></b-form-select>
             </td>
             <td>
               <b-button-group>
@@ -47,7 +47,7 @@
               ></b-form-textarea>
             </td>
             <td>
-              <b-form-select v-model="newMessage.sex" :options="sexes" required></b-form-select>
+              <b-form-select v-model="newMessage.tone" :options="tones" required></b-form-select>
             </td>
             <td>
               <b-button variant="success" v-on:click="createMessage()">Add</b-button>
@@ -72,7 +72,7 @@ export default {
   },
   computed: mapState({
     messages: state => state.fauna.messages,
-    sexes: state => state.fauna.sexes
+    tones: state => state.fauna.tones
   }),
   created() {
     this.$store.dispatch(types.fauna.MESSAGES_LOAD);
@@ -92,7 +92,7 @@ export default {
     defaultMessage() {
       return {
         message: "",
-        sex: null
+        tone: null
       };
     }
   }

@@ -7,7 +7,29 @@ export const QUERY_RECIPIENTS = gql`
         _id
         firstName
         lastName
-        sex
+        tone
+      }
+    }
+  }
+`;
+
+export const QUERY_RECIPIENTS_WITH_TRANSMISSIONS = gql`
+  query AllRecipientsWithTransmissions($id: ID!) {
+    findRecipientByID(id: $id) {
+      _id
+      firstName
+      lastName
+      tone
+      transmissions {
+        data {
+          salutation {
+            greeting
+          }
+          message {
+            message
+          }
+          received
+        }
       }
     }
   }
@@ -19,7 +41,7 @@ export const QUERY_SALUTATIONS = gql`
       data {
         _id
         greeting
-        sex
+        tone
       }
     }
   }
@@ -31,7 +53,7 @@ export const QUERY_MESSAGES = gql`
       data {
         _id
         message
-        sex
+        tone
       }
     }
   }

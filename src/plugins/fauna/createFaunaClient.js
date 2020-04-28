@@ -47,6 +47,17 @@ export const createFaunaClient = ({ ...options }) => {
           console.log(err);
         }
       },
+      async getRecipientById(id) {
+        try {
+          const query = await this.query(
+            faunaQueries.QUERY_RECIPIENTS_WITH_TRANSMISSIONS,
+            { id }
+          );
+          return query.data.findRecipientByID;
+        } catch (err) {
+          console.log(err);
+        }
+      },
       async getSalutations() {
         try {
           const query = await this.query(faunaQueries.QUERY_SALUTATIONS);
@@ -83,7 +94,7 @@ export const createFaunaClient = ({ ...options }) => {
               recipient: {
                 firstName: updatedRecipient.firstName,
                 lastName: updatedRecipient.lastName,
-                sex: updatedRecipient.sex,
+                tone: updatedRecipient.tone,
               },
             }
           );
@@ -122,7 +133,7 @@ export const createFaunaClient = ({ ...options }) => {
               id: updatedSalutation._id,
               salutation: {
                 greeting: updatedSalutation.greeting,
-                sex: updatedSalutation.sex,
+                tone: updatedSalutation.tone,
               },
             }
           );
@@ -161,7 +172,7 @@ export const createFaunaClient = ({ ...options }) => {
               id: updatedMessage._id,
               message: {
                 message: updatedMessage.message,
-                sex: updatedMessage.sex,
+                tone: updatedMessage.tone,
               },
             }
           );

@@ -1,4 +1,5 @@
 const RECIPIENTS_LOAD = "loadRecipients";
+const RECIPIENT_LOAD = "loadRecipient";
 const RECIPIENTS_CREATE = "createRecipient";
 const RECIPIENTS_UPDATE = "updateRecipient";
 const RECIPIENTS_DELETE = "deleteRecipient";
@@ -12,6 +13,7 @@ const MESSAGES_UPDATE = "updateMessages";
 const MESSAGES_DELETE = "deleteMessages";
 
 export const types = {
+  RECIPIENT_LOAD,
   RECIPIENTS_LOAD,
   RECIPIENTS_CREATE,
   RECIPIENTS_UPDATE,

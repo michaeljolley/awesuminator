@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div>
     <BreadCrumb :page="'Recipients'" :icon="'people'" />
 
     <b-card class="wrapper">
@@ -7,39 +7,18 @@
         <thead>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
-          <th scope="col">Sex</th>
+          <th scope="col">Preferred Tone</th>
           <th scope="col"></th>
         </thead>
         <tbody>
           <tr v-for="recipient in recipients" :key="recipient._id">
-            <td scope="row">
-              <b-form-input
-                v-model="recipient.firstName"
-                type="text"
-                required
-                placeholder="First Name"
-              ></b-form-input>
-            </td>
+            <td scope="row">{{recipient.firstName}}</td>
+            <td>{{recipient.lastName}}</td>
+            <td>{{recipient.tone}}</td>
             <td>
-              <b-form-input
-                v-model="recipient.lastName"
-                type="text"
-                required
-                placeholder="Last Name"
-              ></b-form-input>
-            </td>
-            <td>
-              <b-form-select v-model="recipient.sex" :options="sexes" required></b-form-select>
-            </td>
-            <td>
-              <b-button-group>
-                <button type="button" class="btn btn-info" v-on:click="updateRecipient(recipient)">
-                  <b-icon-pencil-square />
-                </button>
-                <b-button variant="danger" v-on:click="deleteRecipient(recipient._id)">
-                  <b-icon-trash />
-                </b-button>
-              </b-button-group>
+              <router-link :to="`recipients/${recipient._id}`" class="btn btn-primary">
+                <b-icon-pencil-square />
+              </router-link>
             </td>
           </tr>
         </tbody>
@@ -52,7 +31,7 @@
         <thead>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
-          <th scope="col">Sex</th>
+          <th scope="col">Tone</th>
           <th scope="col"></th>
         </thead>
         <tbody>
@@ -76,7 +55,7 @@
               ></b-form-input>
             </td>
             <td>
-              <b-form-select v-model="newRecipient.sex" :options="sexes" required></b-form-select>
+              <b-form-select v-model="newRecipient.tone" :options="tones" required></b-form-select>
             </td>
             <td>
               <b-button variant="success" v-on:click="createRecipient()">Add</b-button>
@@ -93,7 +72,7 @@ import { mapState } from "vuex";
 import { types } from "@/state";
 
 export default {
-  name: "Recipients",
+  name: "RecipientDetail",
   data() {
     return {
       newRecipient: this.defaultRecipient()
@@ -101,28 +80,22 @@ export default {
   },
   computed: mapState({
     recipients: state => state.fauna.recipients,
-    sexes: state => state.fauna.sexes
+    tones: state => state.fauna.tones
   }),
   created() {
     this.$store.dispatch(types.fauna.RECIPIENTS_LOAD);
     this.newRecipient = this.defaultRecipient();
   },
   methods: {
-    deleteRecipient(recipientId) {
-      this.$store.dispatch(types.fauna.RECIPIENTS_DELETE, recipientId);
-    },
     createRecipient() {
       this.$store.dispatch(types.fauna.RECIPIENTS_CREATE, this.newRecipient);
       this.newRecipient = this.defaultRecipient();
-    },
-    updateRecipient(recipient) {
-      this.$store.dispatch(types.fauna.RECIPIENTS_UPDATE, recipient);
     },
     defaultRecipient() {
       return {
         firstName: "",
         lastName: "",
-        sex: null
+        tone: null
       };
     }
   }

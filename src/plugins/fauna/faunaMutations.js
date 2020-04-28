@@ -6,7 +6,7 @@ export const MUTATE_RECIPIENT_CREATE = gql`
       _id
       firstName
       lastName
-      sex
+      tone
     }
   }
 `;
@@ -17,7 +17,7 @@ export const MUTATE_RECIPIENT_UPDATE = gql`
       _id
       firstName
       lastName
-      sex
+      tone
     }
   }
 `;
@@ -28,7 +28,7 @@ export const MUTATE_RECIPIENT_DELETE = gql`
       _id
       firstName
       lastName
-      sex
+      tone
     }
   }
 `;
@@ -38,7 +38,7 @@ export const MUTATE_MESSAGE_CREATE = gql`
     createMessage(data: $message) {
       _id
       message
-      sex
+      tone
     }
   }
 `;
@@ -48,7 +48,7 @@ export const MUTATE_MESSAGE_UPDATE = gql`
     updateMessage(id: $id, data: $message) {
       _id
       message
-      sex
+      tone
     }
   }
 `;
@@ -58,7 +58,7 @@ export const MUTATE_MESSAGE_DELETE = gql`
     deleteMessage(id: $id) {
       _id
       message
-      sex
+      tone
     }
   }
 `;
@@ -68,7 +68,7 @@ export const MUTATE_SALUTATION_CREATE = gql`
     createSalutation(data: $salutation) {
       _id
       greeting
-      sex
+      tone
     }
   }
 `;
@@ -78,7 +78,7 @@ export const MUTATE_SALUTATION_UPDATE = gql`
     updateSalutation(id: $id, data: $salutation) {
       _id
       greeting
-      sex
+      tone
     }
   }
 `;
@@ -88,7 +88,7 @@ export const MUTATE_SALUTATION_DELETE = gql`
     deleteSalutation(id: $id) {
       _id
       greeting
-      sex
+      tone
     }
   }
 `;

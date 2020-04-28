@@ -5,20 +5,26 @@ const state = {
   recipients: [],
   salutations: [],
   messages: [],
-  sexes: [
-    { value: null, text: "Select a preferred sex" },
-    { value: "Any", text: "Any" },
-    { value: "Male", text: "Male" },
-    { value: "Female", text: "Female" },
+  currentRecipient: null,
+  tones: [
+    { value: null, text: "Select a preferred tone" },
+    { value: "Neutral", text: "Neutral" },
+    { value: "Masculine", text: "Masculine" },
+    { value: "Feminine", text: "Feminine" },
   ],
   loading: false,
 };
 
 const gets = {
-  [getters.FAUNA_GET_SEXES]: (state) => state.sexes,
+  [getters.FAUNA_GET_TONES]: (state) => state.tones,
+  [getters.FAUNA_GET_RECIPIENT]: (state) => state.currentRecipient,
 };
 
 const actions = {
+  async [types.RECIPIENT_LOAD](context, id) {
+    const recipient = await this._vm.$fauna.getRecipientById(id);
+    context.commit(types.RECIPIENT_LOAD, recipient);
+  },
   async [types.RECIPIENTS_LOAD](context) {
     const recipients = await this._vm.$fauna.getRecipients();
     context.commit(types.RECIPIENTS_LOAD, recipients);
@@ -74,6 +80,9 @@ const actions = {
 const mutations = {
   [types.RECIPIENTS_LOAD](store, payload) {
     store.recipients = payload;
+  },
+  [types.RECIPIENT_LOAD](store, payload) {
+    store.currentRecipient = payload;
   },
   [types.RECIPIENTS_CREATE](state, newRecipient) {
     state.recipients.push(newRecipient);

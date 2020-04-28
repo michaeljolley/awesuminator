@@ -6,7 +6,7 @@
       <table class="table">
         <thead>
           <th scope="col">Greeting</th>
-          <th scope="col">Sex</th>
+          <th scope="col">Tone</th>
           <th scope="col"></th>
         </thead>
         <tbody>
@@ -21,7 +21,7 @@
               ></b-form-textarea>
             </td>
             <td>
-              <b-form-select v-model="salutation.sex" :options="sexes" required></b-form-select>
+              <b-form-select v-model="salutation.tone" :options="tones" required></b-form-select>
             </td>
             <td>
               <b-button-group>
@@ -47,7 +47,7 @@
       <table class="table">
         <thead>
           <th scope="col">Greeting</th>
-          <th scope="col">Sex</th>
+          <th scope="col">Tone</th>
           <th scope="col"></th>
         </thead>
         <tbody>
@@ -61,7 +61,7 @@
               ></b-form-textarea>
             </td>
             <td>
-              <b-form-select v-model="newSalutation.sex" :options="sexes" required></b-form-select>
+              <b-form-select v-model="newSalutation.tone" :options="tones" required></b-form-select>
             </td>
             <td>
               <b-button variant="success" v-on:click="createSalutation()">Add</b-button>
@@ -86,7 +86,7 @@ export default {
   },
   computed: mapState({
     salutations: state => state.fauna.salutations,
-    sexes: state => state.fauna.sexes
+    tones: state => state.fauna.tones
   }),
   created() {
     this.$store.dispatch(types.fauna.SALUTATIONS_LOAD);
@@ -106,7 +106,7 @@ export default {
     defaultSalutation() {
       return {
         greeting: "",
-        sex: null
+        tone: null
       };
     }
   }

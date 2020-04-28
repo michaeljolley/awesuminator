@@ -12,7 +12,18 @@ const routes = [
   },
   {
     path: "/recipients",
-    component: () => import("@/views/Recipients"),
+    component: () => import("@/views/recipients/Index"),
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/recipients/List"),
+      },
+      {
+        path: ":id",
+        component: () => import("@/views/recipients/Detail"),
+        props: true,
+      },
+    ],
   },
   {
     path: "/salutations",

@@ -1,21 +1,27 @@
+type Salutation {
+  greeting: String!
+  tone: String!
+}
+
+type Message {
+    message: String!
+    tone: String!
+}
+
+type Transmission {
+  salutation: Salutation!
+  message: Message!
+  recipient: Recipient!
+  received: Boolean
+}
 
 type Recipient {
   firstName: String!
   lastName: String!
-  sex: String!
+  tone: String!
+  transmissions: [Transmission] @relation
 }
 
-type Salutation {
-    greeting: String!
-    sex: String!
-  }
-
-type Message {
-      message: String!
-      sex: String!
-  }
-
-  
 type Query {
   allRecipients: [Recipient!]
   allSalutations: [Salutation!]
