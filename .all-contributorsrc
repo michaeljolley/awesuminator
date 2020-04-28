@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "thatonejason",
+      "name": "Jason Harrison",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17155?v=4",
+      "profile": "http://www.codingzeal.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "awesuminator",
+  "projectOwner": "MichaelJolley",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
