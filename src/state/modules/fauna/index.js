@@ -18,6 +18,7 @@ const state = {
 const gets = {
   [getters.FAUNA_GET_TONES]: (state) => state.tones,
   [getters.FAUNA_GET_RECIPIENT]: (state) => state.currentRecipient,
+  [getters.FAUNA_GET_RECIPIENTS]: (state) => state.recipients,
 };
 
 const actions = {

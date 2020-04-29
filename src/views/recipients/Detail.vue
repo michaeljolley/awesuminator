@@ -79,8 +79,12 @@ export default {
     this.$store.dispatch(types.fauna.RECIPIENT_LOAD, this.id);
   },
   methods: {
-    deleteRecipient() {
-      this.$store.dispatch(types.fauna.RECIPIENTS_DELETE, this.recipient._id);
+    async deleteRecipient() {
+      await this.$store.dispatch(
+        types.fauna.RECIPIENTS_DELETE,
+        this.recipient._id
+      );
+      this.$router.push("/recipients");
     },
     updateRecipient() {
       this.$store.dispatch(types.fauna.RECIPIENTS_UPDATE, this.recipient);

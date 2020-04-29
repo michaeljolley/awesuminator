@@ -11,7 +11,7 @@
           <th scope="col"></th>
         </thead>
         <tbody>
-          <tr v-for="recipient in recipients" :key="recipient._id">
+          <tr v-for="recipient in getRecipients" :key="recipient._id">
             <td scope="row">{{recipient.firstName}}</td>
             <td>{{recipient.lastName}}</td>
             <td>{{recipient.tone}}</td>
@@ -55,7 +55,7 @@
               ></b-form-input>
             </td>
             <td>
-              <b-form-select v-model="newRecipient.tone" :options="tones" required></b-form-select>
+              <b-form-select v-model="newRecipient.tone" :options="getTones" required></b-form-select>
             </td>
             <td>
               <b-button variant="success" v-on:click="createRecipient()">Add</b-button>
@@ -68,8 +68,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { types } from "@/state";
+import { mapGetters, mapState } from "vuex";
+import { getters, types } from "@/state";
 
 export default {
   name: "RecipientDetail",
@@ -78,12 +78,19 @@ export default {
       newRecipient: this.defaultRecipient()
     };
   },
-  computed: mapState({
-    recipients: state => state.fauna.recipients,
-    tones: state => state.fauna.tones
-  }),
+  computed: {
+    ...mapGetters([
+      getters.fauna.FAUNA_GET_TONES,
+      getters.fauna.FAUNA_GET_RECIPIENTS
+    ])
+  },
   created() {
-    this.$store.dispatch(types.fauna.RECIPIENTS_LOAD);
+    if (
+      !this[getters.fauna.FAUNA_GET_RECIPIENTS] ||
+      this[getters.fauna.FAUNA_GET_RECIPIENTS].length === 0
+    ) {
+      this.$store.dispatch(types.fauna.RECIPIENTS_LOAD);
+    }
     this.newRecipient = this.defaultRecipient();
   },
   methods: {
